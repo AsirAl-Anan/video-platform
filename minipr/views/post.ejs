@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Page</title>
+    <!-- Add Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.22/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-bold text-xl text-pink-500">Clone</div>
+                <div class="flex space-x-8">
+                    <a href="#" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
+                        <span class="material-icons">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
+                        <span class="material-icons">chat</span>
+                        <span>Posts</span>
+                    </a>
+                    <a href="#" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
+                        <span class="material-icons">group</span>
+                        <span>Users</span>
+                    </a>
+                    <a href="/users/<%=loggedInUser.username%>/<%=loggedInUser._id%>" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
+                       
+                      <span class="material-icons">group</span>
+                        <span>Profile</span>
+                    </a>
+                    <a href="/logout" class="flex items-center space-x-1 text-gray-700 hover:text-gray-900">
+                      <span class="material-icons">group</span>
+                      <span>Logout</span>
+                  </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-2xl relative mx-auto p-4 shadow-md rounded-md mt-[100px]">
+        <form action="/create/post" method="post" enctype="multipart/form-data">
+            <h1 class="text-xl text-center cursor-pointer">Create a Post?</h1>
+            <input required type="file" name="image" class="rounded-md my-2 w-full px-3 py-2 border-2 outline-none block" placeholder="Enter image url">
+            <input required type="text" name="title" placeholder="What's on your mind?" class="rounded-md my-2 w-full px-3 py-2 border-2 outline-none block">
+            <textarea required name="description" placeholder="Describe your post" class="rounded-md my-2 w-full px-3 py-2 border-2 outline-none block" cols="30" rows="10"></textarea>
+            <input type="submit" class="text-xl px-3 py-2 rounded-md mt-2 bg-blue-500 hover:bg-blue-600 text-white cursor-pointer" value="Post">
+        </form>
+    </div>
+
+    <div class="max-w-[750px] mx-auto mt-6 px-4">
+        <h3 class="text-base font-semibold text-gray-900 mb-4">People you may know</h3>
+        <div class="carousel carousel-center gap-4 pb-4">
+          <%users.forEach((user)=>{%>
+            <div class="carousel-item flex flex-col items-center">
+              <div class="w-16 h-16 rounded-full overflow-hidden mb-2 border border-gray-200">
+                <img
+                  src="<%=user.image%>"
+                  alt="<%=user.name%>"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="flex flex-col items-center space-y-1">
+                <span class="text-sm font-medium text-gray-900"><%=user.name%></span>
+                <span class="text-xs text-gray-500">Suggested for you</span>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-1 rounded-lg">
+                  Add friend
+                </button>
+              </div>
+            </div>
+          <%})%>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto pt-20 px-4 pb-8">
+        <div class="space-y-6">
+            <%posts.forEach((post)=>{%>
+            <!-- Post Card -->
+            <article class="bg-white rounded-lg shadow-md border border-gray-200">
+                <!-- Post Header -->
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="<%=post.userImage%>" alt="User Avatar" class="w-8 h-8 rounded-full object-cover">
+                        <a href="/users/<%=post.username%>/<%=post.user%>" class="font-semibold text-sm"><%=post.username%></a>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <% if (ifOwner(post)) { %>
+                          <button class="text-sm text-blue-500 hover:text-blue-600">Edit</button>
+                          <button class="text-sm text-red-500 hover:text-red-600">Delete</button>
+                          <button class="text-gray-600 hover:text-gray-900">
+                            <span class="material-icons">more_horiz</span>
+                          </button>
+                        <% } %>
+                      </div>
+                </div>
+
+                <!-- Post Image -->
+                <div class="relative max-h-[600px] overflow-hidden">
+                   <a href="/post/<%=post._id%>"><img src="/posts/<%=post.image%>" alt="Post Image" class="w-full h-auto object-contain"></a> 
+                </div>
+
+                <!-- Post Actions -->
+                <div class="p-4">
+                    <div class="flex justify-between mb-4">
+                        <div class="flex space-x-4">
+                            <button class="text-gray-700">
+                                <a href="/post/like/<%=post._id%>" class="inline-flex">
+                                  <span class="material-icons <%= isLiked(post) ? 'text-red-600' : 'text-gray-900' %>">
+                                    <%= isLiked(post) ? 'favorite' : 'favorite_border' %>
+                                  </span>
+                                </a>
+                              </button>
+                            <button class="text-gray-700 hover:text-gray-900">
+                                <a class="material-icons">chat_bubble_outline</a>
+                            </button>
+                        </div>
+                        <button class="text-gray-700 hover:text-gray-900">
+                            <a class="material-icons">bookmark_border</a>
+                        </button>
+                    </div>
+                    <h2 class="font-bold text-lg text-gray-600 mb-4"><%=post.title%></h2>
+                    <p class="text-gray-500 text-sm"><%=post.time%></p>
+                </div>
+            </article>
+            <%})%>
+        </div>
+    </main>
+</body>
+</html>

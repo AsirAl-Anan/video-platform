@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-like Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white border-b p-4 fixed top-0 w-full z-10">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-semibold">Profile</h1>
+            <div class="flex space-x-4">
+                <span class="material-icons">add_box</span>
+                <span class="material-icons">menu</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <main class="max-w-4xl mx-auto pt-20 px-4">
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+            <!-- Profile Picture -->
+            <div class="w-32 h-32">
+                <img src="/profile-pictures/<%=user.image%>" alt="Profile picture" class="rounded-full border-2 border-gray-200">
+        
+            </div>
+
+            <!-- Profile Info -->
+            <div class="flex-1">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                    <h2 class="text-xl font-medium"><%= user.name%></h2>
+                    <div class="flex gap-2">
+                        <button class="btn btn-primary">Follow</button>
+                        <button class="btn btn-outline">Message</button>
+                        <span class="material-icons btn btn-square btn-outline">person_add</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="flex gap-6 mb-4">
+                    <div class="text-center">
+                        <span class="font-semibold">347</span>
+                        <br>posts
+                    </div>
+                    <div class="text-center">
+                        <span class="font-semibold">892k</span>
+                        <br>followers
+                    </div>
+                    <div class="text-center">
+                        <span class="font-semibold">568</span>
+                        <br>following
+                    </div>
+                </div>
+
+                <!-- Bio -->
+                <div class="mb-4">
+                    <p class="font-medium"><%=user.username%></p>
+                    <p>📍 Location</p>
+                    <p>Bio goes here with multiple lines<br>of interesting information<br>about the user</p>
+                    <a href="#" class="text-blue-900">www.website.com</a>
+                </div>
+            </div>
+        </div>
+
+  
+        <!-- Posts Grid -->
+
+        <div class="border-t">
+            <div class="flex justify-around py-2 border-t">
+                <span class="material-icons text-blue-500">grid_on</span>
+              
+            </div>
+            <div class=" flex flex-wrap items-center min-h-screen">
+                <%if(posts.length > 0){ %>
+                    <%posts.forEach((post)=>{%>
+                        <a href="/post/<%=post._id%>">
+                            <img src="/posts/<%=post.image%>"  alt="Post" class="cursor-pointer w-full aspect-square object-cover mt-4 py-4">
+    
+                        </a>
+    
+                  <%  })%>
+               <% } else { %>
+                <h1 class="text-3xl text-center mt-10" >No post</h1>
+              <% } %> 
+              
+              
+            </div>
+        </div>
+    </main>
+</body>
+</html>

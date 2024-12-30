@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Multer</title>
+</head>
+<body>
+    <div class="w-full bg-gray-600">
+        <%users.forEach((user)=>{%>
+            <img src="../images/uploads/<%=user.profilepic%>" alt="">
+       <% })%>
+        
+    </div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="name" placeholder="enter your name">
+        <label for="image" >Attach your photo</label>
+        <input type="file" name="image" id="">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="bg-gray-600 p-2 text-white">
+        <ul>
+           <li><a href="/read">Read</a></li>
+        </ul>
+    </nav>
+    <div class="p-10">
+        <h1 class="text-center text-3xl">
+            Create User
+        </h1>
+        <form action="/create" method="post"> 
+            <input class="block border-2 outline-none my-2 p-2 w-80 rounded-md" type="text" placeholder="Enter name" name="name">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md" type="text" placeholder="Enter age" name="age">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md" type="text" placeholder="Your country" name="country">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md" type="text" placeholder="Enter email" name="email">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md" type="text" placeholder="image url" name="image">
+            <input class="block border-2 outline-none my-2 p-2 rounded-md hover:bg-sky-400" type="submit" value="Create user" >
+        </form>  
+    </div>
+  
+</body>
+</html>

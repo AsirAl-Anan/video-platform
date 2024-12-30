@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+
+    <div class="w-[80%] mx-auto p-12 flex text-white">
+        <div class="w-2/4 p-4 text-2xl rounded-md mx-1 bg-gray-700">
+            <img src="<%= user.image%>" class="h-44 w-full rounded-md" alt="Image">
+            <h1>Name: <%= user.name%></h1>
+            <h1>Email: <%= user.email%></h1>
+            <h1>Age: <%= user.age%></h1>
+            <h1>Country: <%= user.country%></h1>
+
+
+       
+           <!-- <a href="updateuser/<%user._id%>"></a> -->
+        </div>
+        <div class="w-2/4 p-4 text-2xl rounded-md mx-1 bg-gray-700">
+            <form action="/updateuser/<%=user._id%>" method="post">
+
+            <input class="block border-2 outline-none my-2 p-2 w-80 rounded-md text-black" type="text" placeholder="Enter name" name="name">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md text-black" type="text" placeholder="Enter age" name="age">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md text-black" type="text" placeholder="Your country" name="country">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md text-black" type="text" placeholder="Enter email" name="email">
+            <input class="block border-2 outline-none my-2 my-2 p-2 w-80 rounded-md text-black" type="text" placeholder="image url" name="image">
+            <input class="block border-2 outline-none my-2 p-2 rounded-md hover:bg-sky-400" type="submit" value="Update user" >
+
+        </form>
+            
+        </div>
+    </div>  
+  
+
+</body>
+</html>

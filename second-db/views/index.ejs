@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Index file</title>
+
+
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    
+<div class="w-full min-h-screen bg-zinc-800 p-10">
+    <div class="nav flex gap-2">
+        <a href="/read">Read page</a>
+    </div>
+    <h1 class="text-3xl text-center text-white m-4">Create user</h1>
+    <hr>
+<form action="/create" method="post" >
+    <input name="name" type="text" class="px-5 py-3 my-2 border-2 bg-transparent block" placeholder="Name">
+    <input name="email" type="text" class="px-5 py-3 my-2 border-2 bg-transparent block" placeholder="email">
+    <input name="image" type="text" class="px-5 py-3 my-2 border-2 bg-transparent block" placeholder="image url">
+    <input type="submit" class="px-5 py-3 my-2 border-2  rounded-lg cursor-pointer text-white hover:bg-white hover:text-black block " value="create user">
+</form>
+</div>
+</body>
+</html>
